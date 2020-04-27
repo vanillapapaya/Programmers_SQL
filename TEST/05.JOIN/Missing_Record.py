@@ -1,5 +1,6 @@
-import pymysql
-import pandas as pd
+import sys
+sys.path.append("..")
+import mysql_connect
     
 query = """
 
@@ -12,21 +13,4 @@ query = """
 
 """
 
-# Connect to the database
-conn = pymysql.connect(host = '192.168.0.2',
-                       user = 'vanillapapaya',
-                       password = 'qhans7810!',
-                       db = 'AAC',
-                       charset = 'utf8')
-
-try:
-    with conn.cursor() as cursor:
-        
-        # Show your query result
-        cursor.execute(query)
-        result = pd.read_sql(query, conn)
-        conn.commit()
-        cursor.close()
-
-finally:
-    conn.close()
+result = mysql_connect.query_result(query)
